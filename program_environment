@@ -1,0 +1,47 @@
+import time
+
+class TableEnvironment:
+    def __init__(self, height, width, point):
+        self.height = height
+        self.width = width
+        self.environment = ""
+        self.point = point
+
+    def create_environment(self):
+        self.environment = [["| |" for i in range(self.width)] for i in range(self.height)]
+
+    def delete_environment(self):
+        self.environment = ""
+    
+    def open_environment(self):
+        print("\n".join(" ".join(i) for i in self.environment))
+        
+    
+    def close_environment(self):
+        time.sleep(2)
+        print("\033c")
+
+    def plot(self):
+        position = self.point.get_pos() 
+        self.environment[position[0]][position[1]] = "|-|"
+class Point:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    
+    def change_pos(self, x, y):
+        self.x = x
+        self.y = y
+
+    def get_pos(self):
+        return (self.x, self.y)
+
+p1 = Point(9, 1)
+en1 = TableEnvironment(10, 10, p1)
+en1.create_environment()
+en1.plot()
+en1.open_environment()
+
+
+
